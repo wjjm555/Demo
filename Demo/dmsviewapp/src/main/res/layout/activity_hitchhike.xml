@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SurfaceView
+        android:id="@+id/surface_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/btn_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@mipmap/btn_exit"
+            android:layout_marginRight="30px"
+            android:layout_marginBottom="30px"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/layout_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20px"
+            android:background="#ffffff">
+
+            <ImageView
+                android:id="@+id/img_picture"
+                android:layout_width="680px"
+                android:layout_height="520px"
+                android:src="@mipmap/demo"
+                android:scaleType="centerCrop" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_flash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#ffffff" />
+
+    <FrameLayout
+        android:id="@+id/layout_msg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="160px"
+            android:paddingRight="500px">
+
+            <LinearLayout
+                android:id="@+id/layout_msg_box"
+                android:layout_width="913px"
+                android:layout_height="418px"
+                android:background="@mipmap/img_hitchhike_info"
+                android:paddingLeft="65px"
+                android:paddingTop="55px"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_center"
+                    android:layout_width="300px"
+                    android:layout_height="300px"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/demo"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="right|center_vertical"
+            android:paddingRight="190px">
+
+            <LinearLayout
+                android:id="@+id/layout_phone"
+                android:layout_width="506px"
+                android:layout_height="720px"
+                android:orientation="vertical"
+                android:background="@mipmap/img_hitchhike_phone">
+
+                <TextView
+                    android:id="@+id/text_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="170px"
+                    android:textColor="#000000"
+                    android:textSize="45px"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="70px"
+                    android:text="A message\n from Yuna's DMS"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="186px"
+                    android:paddingTop="165px">
+
+                    <ImageView
+                        android:id="@+id/img_hitchhike_ok"
+                        android:visibility="gone"
+                        android:layout_width="144px"
+                        android:layout_height="144px"
+                        android:src="@mipmap/img_hitchhike_ok"/>
+
+                </LinearLayout>
+                
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_msg_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="180px">
+
+        <ImageView
+            android:layout_width="623px"
+            android:layout_height="116px"
+            android:src="@mipmap/img_hitchhike_text"/>
+
+    </LinearLayout>
+
+    <com.qinggan.cockpit.view.TouchView
+        android:id="@+id/touchView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <com.qinggan.cockpit.view.TouchView
+        android:id="@+id/touchView_end"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+</FrameLayout>

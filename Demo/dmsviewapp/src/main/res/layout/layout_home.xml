@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="300px"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_user"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="320px"
+            android:gravity="center_horizontal|bottom"
+            android:orientation="vertical">
+
+            <com.qinggan.cockpit.view.UserHeadView
+                android:id="@+id/user_icon"
+                android:layout_width="120px"
+                android:layout_height="120px" />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="30px"
+                android:paddingBottom="1px"
+                android:text="Unknown"
+                android:textColor="#ffffff"
+                android:textSize="40px" />
+
+            <TextView
+                android:id="@+id/user_mgr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Account\nManagement >"
+                android:textColor="@drawable/btn_mgr"
+                android:textSize="20px" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="30px"
+            android:paddingTop="40px"
+            android:paddingBottom="60px">
+
+            <LinearLayout
+                android:id="@+id/btn_borrow"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/menu_icon2" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="3px"
+                    android:text="Borrow Car"
+                    android:textColor="@drawable/btn_common"
+                    android:textSize="22px" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_live_sharing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/menu_icon3" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="3px"
+                    android:text="Lives Sharing"
+                    android:textColor="@drawable/btn_common"
+                    android:textSize="22px" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_hitchhike"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/menu_icon4" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5px"
+                    android:text="Hitchhiking"
+                    android:textColor="@drawable/btn_common"
+                    android:textSize="22px" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_fatigue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/menu_icon1" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="3px"
+                    android:text="Fatigue Driving"
+                    android:textColor="@drawable/btn_common"
+                    android:textSize="22px" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.qinggan.dms.library.views.DragLayout
+        android:id="@+id/dragView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:horizontal_item_margin="20px"
+        app:large_item_height="560px"
+        app:large_item_width="600px"
+        app:small_item_height="175px"
+        app:small_item_width="260px" />
+
+</LinearLayout>

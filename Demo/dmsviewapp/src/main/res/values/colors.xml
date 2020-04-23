@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2893a4</color>
+    <color name="colorPrimaryDark">#2893a4</color>
+    <color name="colorAccent">#2893a4</color>
+
+    <color name="mgr_nor">#ff9600</color>
+    <color name="mgr_press">#ffffff</color>
+
+    <color name="common_nor">#ffffff</color>
+    <color name="common_dis">#666666</color>
+    <color name="common_press">#ff9600</color>
+
+</resources>

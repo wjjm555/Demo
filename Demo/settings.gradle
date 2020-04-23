@@ -1,0 +1,1 @@
+include ':app', ':dmsviewlibrary', ':dmsviewapp','myencryptionapplication','recognitionapp'

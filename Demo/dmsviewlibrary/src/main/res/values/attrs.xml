@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DragLayout">
+
+        <attr name="large_item_width" format="dimension" />
+        <attr name="large_item_height" format="dimension" />
+        <attr name="small_item_width" format="dimension" />
+        <attr name="small_item_height" format="dimension" />
+        <attr name="horizontal_item_margin" format="dimension" />
+
+    </declare-styleable>
+
+</resources>
