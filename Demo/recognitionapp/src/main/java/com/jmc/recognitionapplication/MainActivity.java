@@ -1,12 +1,10 @@
 package com.jmc.recognitionapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.os.EnvironmentCompat;
-
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
@@ -17,8 +15,6 @@ import com.baidu.ocr.sdk.model.GeneralResult;
 import com.baidu.ocr.sdk.model.WordSimple;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        final String name = "国际商务", file = "4";
-        final List<String> numbers = new ArrayList<>();
-
 //        final int max = 16;
 //        for (int i = 1; i <= max; ++i) {
 //            numbers.add(String.valueOf(i));
@@ -73,46 +66,81 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Log.e(TAG, "Thread Start");
-                recognizeImages(file, name, numbers);
+                File[] folders = imageDirectory.listFiles();
+                if (folders != null) {
+                    recognizeFolder(new ArrayList<>(Arrays.asList(folders)));
+                }
+
 
             }
         }.start();
     }
 
-    private void recognizeImages(final String fileDir, final String outFile, final List<String> fileIndexArr) {
-        if (fileIndexArr.size() > 0) {
-            final String fileIndex = fileIndexArr.remove(0);
+    private void recognizeFolder(final List<File> folders) {
+        if (folders.size() > 0) {
+            File folder = folders.remove(0);
 
-            Log.i(TAG, "recognizeImages fileIndex:" + fileIndex);
+            if (folder != null) {
+                recognizeImages(folder, new RecognizeFolderListener() {
 
-            recognize(fileDir, fileIndex, new RecognizeListener() {
+                    @Override
+                    public void onRecognizeFolderFinish() {
+                        recognizeFolder(folders);
+                    }
+                });
+            }
+
+        } else {
+            Log.e(TAG, "Thread End");
+        }
+
+
+    }
+
+    private void recognizeImages(File folder, RecognizeFolderListener listener) {
+        if (folder != null) {
+            File outFolder = new File(textDirectory, folder.getName());
+            if (!outFolder.exists()) outFolder.mkdir();
+
+            File[] files = folder.listFiles();
+
+            if (files != null)
+                recognizeFiles(outFolder, new ArrayList<>(Arrays.asList(files)), listener);
+
+        }
+    }
+
+
+    private void recognizeFiles(final File outFolder, final List<File> files, final RecognizeFolderListener listener) {
+        if (files.size() > 0) {
+            final File file = files.remove(0);
+
+            Log.i(TAG, "recognizeImages file:" + file);
+
+            recognize(file, new RecognizeListener() {
                 @Override
                 public void onRecognizeBack(String file, String string) {
                     Log.w(TAG, "onRecognizeSuccess:" + file);
-                    write(outFile, fileIndex, string);
-                    recognizeImages(fileDir, outFile, fileIndexArr);
+                    write(outFolder, file, string);
+                    recognizeFiles(outFolder, files, listener);
                 }
 
                 @Override
                 public void onRecognizeErr(String file) {
                     Log.e(TAG, "onRecognizeFail:" + file);
-                    recognizeImages(fileDir, outFile, fileIndexArr);
+                    recognizeFiles(outFolder, files, listener);
                 }
             });
         } else {
-            Log.e(TAG, "Thread End");
+            if (listener != null) listener.onRecognizeFolderFinish();
         }
-
     }
 
-    private void recognize(String fileDir, final String fileName, final RecognizeListener listener) {
-        final String filePath = imageDirectory.getAbsolutePath() + File.separator + fileDir + File.separator + fileName + ".png";
-
-        Log.i(TAG, "recognize step 1 :filePath:" + filePath);
+    private void recognize(final File file, final RecognizeListener listener) {
 
         GeneralBasicParams param = new GeneralBasicParams();
         param.setDetectDirection(true);
-        param.setImageFile(new File(filePath));
+        param.setImageFile(file);
 
         Log.i(TAG, "recognize step 2");//recognizeGeneralBasic recognizeAccurateBasic
         OCR.getInstance(this).recognizeAccurateBasic(param, new OnResultListener<GeneralResult>() {
@@ -125,27 +153,24 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 Log.i(TAG, "recognize onResult");
-                listener.onRecognizeBack(fileName, stringBuilder.toString());
+                listener.onRecognizeBack(file.getName(), stringBuilder.toString());
             }
 
             @Override
             public void onError(OCRError ocrError) {
                 Log.i(TAG, "onError:" + ocrError.getLocalizedMessage());
-                listener.onRecognizeErr(fileName);
+                listener.onRecognizeErr(file.getName());
             }
         });
 
     }
 
-    private void write(String fileName, String fileIndex, String string) {
-        String filePath = textDirectory.getAbsolutePath() + File.separator + fileName + fileIndex + ".txt";
-        Log.i(TAG, "write step 1 filePath：" + filePath);
-
-        File file = new File(filePath);
+    private void write(File folder, String fileName, String string) {
+        File file = new File(folder, fileName + ".txt");
         if (file.exists()) file.delete();
 
         try {
-            FileWriter fileWriter = new FileWriter(filePath, true);
+            FileWriter fileWriter = new FileWriter(file, true);
             Log.i(TAG, "write step 2");
             fileWriter.write(string);
             fileWriter.flush();
@@ -174,5 +199,10 @@ public class MainActivity extends AppCompatActivity {
         void onRecognizeBack(String file, String string);
 
         void onRecognizeErr(String file);
+    }
+
+    interface RecognizeFolderListener {
+        void onRecognizeFolderFinish();
+
     }
 }
